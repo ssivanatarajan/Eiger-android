@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:name="shivtech.eiger.UserListFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context="shivtech.eiger.UserListFragment"
+     >
+    <android.support.v7.widget.SearchView
+        android:layout_width="match_parent"
+        android:id="@+id/userlist_searchview"
+        app:iconifiedByDefault="false"
+        app:defaultQueryHint="Search Users"
+        android:layout_height="wrap_content"/>
+
+    <ListView
+        android:id="@+id/userList"
+        android:layout_marginTop="10dp"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"
+        android:layout_width="match_parent"
+        android:background="@drawable/gradient"
+        android:divider="@drawable/list_divider"
+        android:dividerHeight="3px"
+        android:layout_below="@+id/userlist_searchview"
+        android:layout_height="wrap_content"
+        android:scrollbarStyle="outsideInset" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_list_progressbar"
+        android:visibility="gone"/>
+
+</RelativeLayout>

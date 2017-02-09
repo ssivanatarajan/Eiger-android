@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color> -->
+    <color name="colorPrimary">#FF6422</color>
+    <color name="colorPrimaryDark">#FF472C</color>
+    <color name="colorAccent">#FF6422</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#ffffff</color>
+    <color name="fb_blue">#3A589C</color>
+    <color name="btn_bgclr_orange">#FF6422</color>
+    <color name="dialog_header_text_color">#FF6422</color>
+    <color name="call_btn_bg">#17DA81</color>
+    <color name="textlinkcolor">#2396EF</color>
+    <color name="semitransparent">#55000000</color>
+    <color name="dialogbgcolor">#DDFFFFFF</color>
+    <color name="transparentPrimary">#88FF6422</color>
+    <color name="toggle_bg">#CCCCCC</color>
+    <color name="edittextbg">#33000000</color>
+    <color name="buttonborder">#88FFFFFF</color>
+</resources>

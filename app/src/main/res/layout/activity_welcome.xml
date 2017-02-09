@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="shivtech.eiger.WelcomeActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <RelativeLayout
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:keepScreenOn="true"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/icon"
+            android:src="@mipmap/ic_launcher"/>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/empid_ip_layout"
+            android:textColorHint="@color/white"
+            android:layout_below="@+id/icon"
+
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                android:id="@+id/ip_empid"
+                android:textColor="@color/white"
+                android:hint="Emp ID"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/mobile_ip_layout"
+            android:textColorHint="@color/white"
+            android:layout_below="@+id/empid_ip_layout"
+
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:id="@+id/ip_mobile"
+                android:hint="Mobile"
+                />
+        </android.support.design.widget.TextInputLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/mobile_ip_layout"
+    android:layout_marginTop="30dp"
+    >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/mobile_ip_layout"
+            android:id="@+id/submit"
+            android:textColor="@color/white"
+            android:background="@drawable/trans_btn_white_brdr"
+            android:text="Submit"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reset"
+            android:background="@color/white"
+            android:textColor="@color/colorPrimary"
+            android:layout_below="@+id/mobile_ip_layout"
+            android:layout_toRightOf="@+id/submit"/>
+</LinearLayout>
+        </RelativeLayout>
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    </RelativeLayout>
