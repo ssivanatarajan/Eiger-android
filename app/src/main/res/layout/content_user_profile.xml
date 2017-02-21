@@ -13,4 +13,243 @@
     tools:context="shivtech.eiger.UserProfile"
     tools:showIn="@layout/activity_user_profile">
 
+    <ScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+
+                android:layout_marginTop="10dp"
+                android:id="@+id/user_team_card"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Team"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:textStyle="bold"
+
+                        />
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/UP_team"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:paddingLeft="10dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Tower"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/UP_tower"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Manager"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/UP_manager"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/user_team_card"
+                android:layout_marginTop="10dp"
+                android:id="@+id/user_contact_card"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Team"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Ap_app_team"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:layout_marginTop="5dp"
+
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Tower"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Ap_app_tower"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:paddingLeft="10dp"
+                        android:layout_marginTop="5dp"
+
+                        />
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_below="@+id/app_team_card"
+                android:layout_marginTop="10dp"
+
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Primary Contact"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:textStyle="bold"
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Ap_app_primary"
+                            android:textSize="@dimen/profile_heading_text"
+
+                            android:textColor="@color/textlinkcolor"
+                            android:paddingLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:background="@null"
+                                android:id="@+id/Ap_app_primary_Call_btn"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_call"
+                                />
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:id="@+id/Ap_app_primary_msg_btn"
+                                android:background="@null"
+                                android:src="@drawable/ic_message"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Secondary Contact"
+                        android:textSize="@dimen/profile_heading_text"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Ap_app_secondary"
+
+                            android:textSize="@dimen/profile_heading_text"
+                            android:textColor="@color/textlinkcolor"
+                            android:paddingLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:id="@+id/Ap_app_secondary_call_btn"
+                                android:layout_gravity="center"
+                                android:background="@null"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_call"
+
+                                />
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:id="@+id/Ap_app_secondary_msg_btn"
+                                android:layout_marginRight="10dp"
+                                android:background="@null"
+                                android:src="@drawable/ic_message"
+                                />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

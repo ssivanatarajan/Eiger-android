@@ -6,7 +6,7 @@ package shivtech.eiger.models;
 
 public class Tower {
 
-    private static int towerId;
+    private  int towerId;
 
     private  String towerName;
     private  String towerManager;
@@ -39,6 +39,9 @@ public class Tower {
         this.towerManager = towerManager;
     }
 
-
+    @Override
+    public String toString() {
+        return this.towerName;
+    }
 
 }

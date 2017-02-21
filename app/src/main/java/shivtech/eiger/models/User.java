@@ -10,12 +10,37 @@ public class User {
     private String userName;
     private String tcsEmail;
     private int empID;
-
     private String userMobile;
-    private String userTower;
-
+    private int userTower;
     private String userManager;
     private String dob;
+    private String summary;
+    private String tools;
+    private String programming_langs;
+
+    public String getTools() {
+        return tools;
+    }
+
+    public void setTools(String tools) {
+        this.tools = tools;
+    }
+
+    public String getProgramming_langs() {
+        return programming_langs;
+    }
+
+    public void setProgramming_langs(String programming_langs) {
+        this.programming_langs = programming_langs;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
     public String getProjectEmail() {
         return projectEmail;
@@ -86,11 +111,11 @@ public class User {
         this.userMobile = userMobile;
     }
 
-    public String getUserTower() {
+    public int getUserTower() {
         return userTower;
     }
 
-    public void setUserTower(String userTower) {
+    public void setUserTower(int userTower) {
         this.userTower = userTower;
     }
 
@@ -103,13 +128,13 @@ public class User {
     }
 
 
-    public User(int userId, String userName, String userTower) {
+    public User(int userId, String userName, int userTower) {
         this.userId = userId;
         this.userName = userName;
         this.userTower = userTower;
     }
 public User(){}
-    public User( String userName, int userId, String userEmail, String userMobile, String userTower, String userManager, String userPrimaryApps, String userSecondaryApps) {
+    public User( String userName, int userId, String userEmail, String userMobile, int userTower, String userManager, String userPrimaryApps, String userSecondaryApps) {
 
         this.userName = userName;
         this.userId = userId;

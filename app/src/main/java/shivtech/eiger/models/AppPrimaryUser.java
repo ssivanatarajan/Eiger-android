@@ -5,8 +5,17 @@ package shivtech.eiger.models;
  */
 
 public class AppPrimaryUser {
-    private int userId;
+    private int empId;
     private int appId;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getAppId() {
         return appId;
@@ -16,12 +25,12 @@ public class AppPrimaryUser {
         this.appId = appId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getEmpId() {
+        return empId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setEmpId(int empId) {
+        this.empId = empId;
     }
 
 

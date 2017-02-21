@@ -1,5 +1,7 @@
 package shivtech.eiger.jsonparser;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,7 @@ public class TowerJSONParser {
         ArrayList<Tower> towerArrayList=new ArrayList<Tower>();
         try {
             JSONArray jsonArray=new JSONArray(json);
+            Log.e("tower json array",jsonArray.toString());
             for(int i=0;i<jsonArray.length();i++)
             {
                 JSONObject towerJSON=jsonArray.getJSONObject(i);
@@ -36,6 +39,7 @@ public class TowerJSONParser {
                 towerArrayList.add(tower);
 
             }
+            Log.e("tower array length",towerArrayList.size()+"");
             return towerArrayList;
         } catch (JSONException e) {
             e.printStackTrace();

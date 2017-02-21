@@ -1,0 +1,174 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView"
+    android:fillViewport="true"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    tools:context="shivtech.eiger.PersonlProfile">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/name_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:maxLines="1"
+            android:hint="Name"
+            />
+    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/name_ip_layout"
+            android:id="@+id/summary_ip_layout"
+            app:hintTextAppearance="@style/floatingLabel"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/summary"
+                android:maxLines="6"
+                android:lines="3"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:gravity="top|left"
+                android:hint="Summary"
+                />
+        </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/mobile_ip_layout"
+        android:layout_below="@+id/summary_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mobile"
+
+            android:inputType="phone"
+            android:maxLines="1"
+            android:hint="Mobile (+xx-xxxxxxxxxx)"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/tcsEmail_ip_layout"
+        android:layout_below="@+id/mobile_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tcsEmail"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+
+            android:hint="TCS Email"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/projectEmail_ip_layout"
+        android:layout_below="@+id/tcsEmail_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/projectEmail"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="Project Email"
+            />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/dob_ip_layout"
+        android:layout_below="@+id/projectEmail_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dob"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="DOB"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/bloodgroup_ip_layout"
+        android:layout_below="@+id/dob_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bloodgroup"
+            android:hint="Blood Group"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/hobbies_ip_layout"
+        android:layout_below="@+id/bloodgroup_ip_layout"
+        app:hintTextAppearance="@style/floatingLabel"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hobbies"
+            android:inputType="text"
+            android:hint="hobbies"
+
+            />
+    </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hobbies_ip_layout"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="40dp"
+
+                >
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/reset"
+                    android:textColor="@color/white"
+                    android:background="@drawable/orange_btn_white_brdr"
+                    android:text="Reset"
+                    />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Save"
+                    android:background="@drawable/trans_btn_orange_brdr"
+
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/save"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+</ScrollView>

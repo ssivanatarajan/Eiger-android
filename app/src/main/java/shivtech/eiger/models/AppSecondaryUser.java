@@ -6,7 +6,7 @@ package shivtech.eiger.models;
 
 public class AppSecondaryUser {
 
-    private int userId;
+    private int empId;
     private int appId;
     private int id;
 
@@ -26,11 +26,11 @@ public class AppSecondaryUser {
         this.appId = appId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getEmpId() {
+        return empId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setEmpId(int userId) {
+        this.empId = userId;
     }
 }

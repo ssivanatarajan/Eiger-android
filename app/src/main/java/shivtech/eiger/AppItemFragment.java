@@ -3,7 +3,6 @@ package shivtech.eiger;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -11,20 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
-import shivtech.eiger.db.DataBaseHandler;
-import shivtech.eiger.dummy.DummyContent;
-import shivtech.eiger.dummy.DummyContent.DummyItem;
+
 import shivtech.eiger.models.App;
-import shivtech.eiger.models.User;
 
-import java.io.Console;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * A fragment representing a list of Items.
@@ -134,13 +126,7 @@ public class AppItemFragment extends Fragment {
             int [] viewTypes=new int[no_of_apps];
             char [] alphabet_index=new char[no_of_apps];
             String firstLetter="A";
-            for(int i=1;i<no_of_apps-1;i++)
-            {
-                if(!DummyContent.ITEMS.get(i).appName.substring(0,1).toUpperCase().equals(DummyContent.ITEMS.get(i+1).appName.substring(0,1).toUpperCase()))
-                {
 
-                }
-            }
             sortApps();
             mAppsAdapter=new MyAppItemRecyclerViewAdapter(filteredApps, mListener);
             recyclerView.setAdapter(mAppsAdapter);

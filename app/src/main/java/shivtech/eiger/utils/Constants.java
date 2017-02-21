@@ -7,6 +7,9 @@ import java.util.Map;
  */
 
 public class Constants {
+
+    //public static String currentUser="CurrentUser";
+
     //dbname
     public static String dbName="Eiger";
     public static short dbVersion=1;
@@ -38,6 +41,9 @@ public class Constants {
     public static String projectEmail="projectEmail";
     public static String bloodGroup="bloodGroup";
     public static String dob="dob";
+    public static String summary="summary";
+    public static String tools="tools";
+    public static String programming_langs="programming_langs";
 
     public static String towername="name";
     public static String manager="manager";
@@ -51,5 +57,14 @@ public class Constants {
 
     public static String shared_prefs="Eiger_sp";
     public static String sp_firstLoad="FirstLoad";
-    public static String sp_empId="Empid";
+    public static String sp_cur_user_empId="Cur_user_Empid";
+    public static String sp_cur_user_name="Cur_user_name";
+
+    //post params
+    public static String KEY_EMPID="empId";
+    public static String KEY_PASSWORD="password";
+
+
 }
+
+

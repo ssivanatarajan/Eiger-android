@@ -7,6 +7,15 @@ package shivtech.eiger.models;
 public class Team {
     private  int teamID;
     private  String teamName;
+    private int towerID;
+
+    public int getTowerID() {
+        return towerID;
+    }
+
+    public void setTowerID(int towerID) {
+        this.towerID = towerID;
+    }
 
     public  String getTeamName() {
         return teamName;

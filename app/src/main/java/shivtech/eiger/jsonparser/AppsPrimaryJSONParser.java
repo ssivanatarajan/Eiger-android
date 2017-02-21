@@ -1,5 +1,7 @@
 package shivtech.eiger.jsonparser;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,18 +26,26 @@ String json;
         ArrayList<AppPrimaryUser> appPrimaryUserArrayList = new ArrayList<AppPrimaryUser>();
         try {
             JSONArray jsonArray = new JSONArray(json);
+            Log.e("Appprimary json array",jsonArray.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject JSON = jsonArray.getJSONObject(i);
-                int appid = JSON.getInt(Constants.appId);
-                int userid = JSON.getInt(Constants.userId);
-                AppPrimaryUser appPrimaryUser = new AppPrimaryUser();
-                appPrimaryUser.setAppId(appid);
-                appPrimaryUser.setUserId(userid);
-                appPrimaryUserArrayList.add(appPrimaryUser);
+                try {
+                    JSONObject JSON = jsonArray.getJSONObject(i);
+                    int appid = JSON.getInt(Constants.appId);
+                    int empid = JSON.getInt(Constants.empId);
 
+                    AppPrimaryUser appPrimaryUser = new AppPrimaryUser();
+                    appPrimaryUser.setAppId(appid);
+                    appPrimaryUser.setEmpId(empid);
+
+                    appPrimaryUserArrayList.add(appPrimaryUser);
+                }
+                catch (JSONException e){
+                    Log.e("app primary exp",e.toString());
+                }
             }
             return appPrimaryUserArrayList;
         } catch (JSONException e) {
+            Log.e("app primary exp",e.toString());
             e.printStackTrace();
         }
     return appPrimaryUserArrayList;

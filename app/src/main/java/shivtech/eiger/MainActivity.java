@@ -1,11 +1,13 @@
 package shivtech.eiger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,14 +17,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
-import shivtech.eiger.dummy.DummyContent;
+import shivtech.eiger.db.DBHandler;
+
 import shivtech.eiger.models.App;
 import shivtech.eiger.models.User;
+import shivtech.eiger.utils.Constants;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,AppItemFragment.OnListFragmentInteractionListener, AppListFragment.OnFragmentInteractionListener,UserListFragment.OnListFragmentInteractionListener{
-
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sp_editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +50,25 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+        sharedPreferences=getApplicationContext().getSharedPreferences(Constants.shared_prefs, Context.MODE_PRIVATE);
+        sp_editor=sharedPreferences.edit();
+        DBHandler dbHandler=new DBHandler(getApplicationContext());
+        int int_empid=sharedPreferences.getInt(Constants.sp_cur_user_empId,0);
+        Log.e("Curr emp id",int_empid+"");
+        String loggedinUsername=dbHandler.getUsername(int_empid);
+        sp_editor.putString(Constants.sp_cur_user_name,loggedinUsername);
+        Log.e("logged in user",loggedinUsername);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.getMenu().getItem(0).setCheckable(true);
         navigationView.getMenu().getItem(0).setChecked(true);
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
+        sharedPreferences=getApplicationContext().getSharedPreferences(Constants.shared_prefs, Context.MODE_PRIVATE);
+        View mHeaderView=navigationView.getHeaderView(0);
+        TextView nav_bar_title=(TextView)mHeaderView.findViewById(R.id.nav_header_title);
+
+        nav_bar_title.setText(loggedinUsername);
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ import shivtech.eiger.utils.Constants;
 
 public class DBHandler extends SQLiteOpenHelper{
 
-    private static String DB_NAME = "Eiger";
+
     public static Map<Integer,String> towerNames;
     public static Map<Integer,String> towerManagers;
     public Map<Integer,String> teamNames;
@@ -44,15 +45,15 @@ public class DBHandler extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String userTableCreatequery="CREATE TABLE users (userID INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT NOT NULL, mobile TEXT UNIQUE, tcsEmail TEXT UNIQUE, projectEmail TEXT UNIQUE, dob DATE, empID INTEGER UNIQUE NOT NULL, bloodGroup TEXT NOT NULL);";
+        String userTableCreatequery="CREATE TABLE users (userID INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT NOT NULL, mobile TEXT UNIQUE, tcsEmail TEXT UNIQUE, projectEmail TEXT UNIQUE, dob DATE, empID INTEGER UNIQUE NOT NULL, bloodGroup TEXT NOT NULL,tower INTEGER NOT NULL,summary TEXT,tools TEXT,programming_langs TEXT );";
 
         String appsTableCreatequery="CREATE TABLE apps (appID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " name TEXT NOT NULL, category TEXT CONSTRAINT categoryConstraint CHECK (category IN ('Platinum', 'Black', 'Gold', 'Silver', 'Bronze')), " +
                 "supportLevel TEXT CONSTRAINT supportLevelconstraint CHECK (supportLevel IN ('L1', 'L2', 'L3')), tower INTEGER REFERENCES tower (towerID), team INTEGER REFERENCES team (teamID), alias TEXT);";
 
-        String appPriUserMapTableCreateQuery="CREATE TABLE appprimaryusermappings (appID INTEGER PRIMARY KEY   REFERENCES apps (appID), userID INTEGER REFERENCES users (userID));";
-        String appSecUserMapTableCreateQuery="CREATE TABLE appsecondaryusermappings (id INTEGER PRIMARY KEY  AUTOINCREMENT , appID REFERENCES apps (appID), userID INTEGER REFERENCES users (userID));";
-        String teamTableTableCreateQuery="CREATE TABLE teams (teamID INTEGER  PRIMARY KEY AUTOINCREMENT , name TEXT NOT NULL);";
+        String appPriUserMapTableCreateQuery="CREATE TABLE appprimaryusermappings (id INTEGER PRIMARY KEY  AUTOINCREMENT ,appID   REFERENCES apps (appID), empID INTEGER REFERENCES users (empID));";
+        String appSecUserMapTableCreateQuery="CREATE TABLE appsecondaryusermappings (id INTEGER PRIMARY KEY  AUTOINCREMENT , appID  INTEGER REFERENCES apps (appID), empID INTEGER REFERENCES users (empID));";
+        String teamTableTableCreateQuery="CREATE TABLE teams (teamID INTEGER  PRIMARY KEY AUTOINCREMENT , name TEXT NOT NULL,towerID INTEGER  REFERENCES towers (towerID));";
         String towerTableCreateQuery="CREATE TABLE towers (towerID INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT NOT NULL, manager INTEGER);";
 
         db.execSQL(towerTableCreateQuery);
@@ -106,7 +107,7 @@ catch(SQLException e)
             try
             {
                 ContentValues contentValues=new ContentValues();
-                contentValues.put(Constants.userId,appPrimaryUser.getUserId());
+                contentValues.put(Constants.empId,appPrimaryUser.getEmpId());
                 contentValues.put(Constants.appId,appPrimaryUser.getAppId());
                 db.insert(Constants.appPrimaryUserTable,null,contentValues);
             }
@@ -128,8 +129,8 @@ catch(SQLException e)
             try
             {
                 ContentValues contentValues=new ContentValues();
-                contentValues.put(Constants.id,appSecondaryUser.getId());
-                contentValues.put(Constants.userId,appSecondaryUser.getUserId());
+
+                contentValues.put(Constants.empId,appSecondaryUser.getEmpId());
                 contentValues.put(Constants.appId,appSecondaryUser.getAppId());
                 db.insert(Constants.appSecondaryUserTable,null,contentValues);
             }
@@ -159,6 +160,10 @@ catch(SQLException e)
                 userContent.put(Constants.bloodGroup,user.getBloodGroup());
                 userContent.put(Constants.dob,user.getDob());
                 userContent.put(Constants.mobile,user.getUserMobile());
+                userContent.put(Constants.summary,user.getSummary());
+                userContent.put(Constants.tools,user.getTools());
+                userContent.put(Constants.programming_langs,user.getProgramming_langs());
+                userContent.put(Constants.tower,user.getUserTower());
                 db.insert(Constants.userTable,null,userContent);
             }
             catch (SQLException e)
@@ -179,10 +184,12 @@ catch(SQLException e)
 
             Tower tower = towersList.get(i);
             try {
+                Log.e("tower content",tower.getTowerId()+" "+tower.getTowerName()+ " "+tower.getTowerManager());
                 ContentValues towerContent = new ContentValues();
                 towerContent.put(Constants.towerId,tower.getTowerId());
                 towerContent.put(Constants.towername,tower.getTowerName());
                 towerContent.put(Constants.manager,tower.getTowerManager());
+
                 db.insert(Constants.towerTable,null,towerContent);
             }
             catch (SQLException exp)
@@ -203,7 +210,7 @@ catch(SQLException e)
                 ContentValues teamContent = new ContentValues();
                 teamContent.put(Constants.teamID,team.getTeamID());
                 teamContent.put(Constants.teamname,team.getTeamName());
-
+                teamContent.put(Constants.towerId,team.getTowerID());
                 db.insert(Constants.teamTable,null,teamContent);
             }
             catch (SQLException exp)
@@ -296,14 +303,15 @@ public int getMaxAppID()
         Log.e("Usercur len",usercur.getCount()+"");
         Cursor primaryCur=db.rawQuery("Select "+Constants.userId +" from "+Constants.appPrimaryUserTable+" where "+Constants.appId+" = "+appId,null);
         Log.e("primaryCursor len",primaryCur.getCount()+"");
-        primaryCur.moveToFirst();
-        Log.e("userid",primaryCur.getInt(0)+"");
+      /*  if(primaryCur.getCount()>0)
+            primaryCur.moveToFirst();
+            Log.e("userid",primaryCur.getInt(0)+"");
 
         Cursor secondaryCur=db.rawQuery("Select "+Constants.userId +" from "+Constants.appSecondaryUserTable+" where "+Constants.appId+" = "+appId,null);
         Log.e("secondaryCur len",secondaryCur.getCount()+"");
         secondaryCur.moveToFirst();
         Log.e("userid",secondaryCur.getInt(0)+"");
-
+*/
         String primaryUserQuery="Select "+Constants.userId+","+Constants.username+","+Constants.mobile+" from "+Constants.userTable+" where "+Constants.userId +" in (" +
                 "Select "+Constants.userId +" from "+Constants.appPrimaryUserTable + " where "+Constants.appId+" = "+appId+" )";
 
@@ -315,18 +323,25 @@ public int getMaxAppID()
         Cursor primaryUsercursor=db.rawQuery(primaryUserQuery,null);
         Cursor secondaryUsercursor=db.rawQuery(SecondaryUserQuery,null);
 
-        if(primaryUsercursor!=null)
+        if(primaryUsercursor.getCount()>0)
         {
             Log.e("primaryUSercurs len",primaryUsercursor.getCount()+"");
             primaryUsercursor.moveToFirst();
-            User primaryUser=new User();
-            primaryUser.setUserId(primaryUsercursor.getInt(0));
-            primaryUser.setUserName(primaryUsercursor.getString(1));
-            primaryUser.setUserMobile(primaryUsercursor.getString(2));
+            ArrayList<User> primaryUserList=new ArrayList<User>();
+            do {
+                User primaryUser = new User();
+                primaryUser.setUserId(primaryUsercursor.getInt(0));
+                primaryUser.setUserName(primaryUsercursor.getString(1));
+                primaryUser.setUserMobile(primaryUsercursor.getString(2));
+                primaryUserList.add(primaryUser);
+            }while (primaryUsercursor.moveToNext());
+            app.setAppPrimaryRes(primaryUserList);
 //String primaryUser=primaryUsercursor.getString(0);
-            app.setAppPrimaryRes(primaryUser);
+
+
+
         }
-        if(secondaryUsercursor!=null)
+        if(secondaryUsercursor.getCount()>0)
         {
             Log.e("SecondaryUSercurs len",secondaryUsercursor.getCount()+"");
             ArrayList<User> secReslist=new ArrayList<User>();
@@ -341,7 +356,7 @@ public int getMaxAppID()
         app.setAppSecondaryRes(secReslist);
         }
 
-        if(cursor!=null)
+        if(cursor.getCount()>0)
         {
             app.setAppId(cursor.getInt(cursor.getColumnIndex(Constants.appId)));
             app.setAppName(cursor.getString(cursor.getColumnIndex(Constants.appName)));
@@ -353,7 +368,7 @@ public int getMaxAppID()
             String teamQuery="Select "+Constants.teamname +" from "+Constants.teamTable +" where "+Constants.teamID + " = "+teamid ;
             Cursor teamCursor=db.rawQuery(teamQuery,null);
 
-            if(teamCursor!=null)
+            if(teamCursor.getCount()>0)
             {
                 teamCursor.moveToFirst();
                 app.setAppTeam(teamCursor.getString(0));
@@ -372,11 +387,11 @@ public int getMaxAppID()
 
     public ArrayList<User> getUsers()
     {
-        SQLiteDatabase db=this.getWritableDatabase();
+        SQLiteDatabase db=this.getReadableDatabase();
         ArrayList<User> usersList=new ArrayList<User>();
         String UserselectQuery="Select "+Constants.userId+" , "+Constants.username+" , "+Constants.mobile+" from "+Constants.userTable;
         Cursor userCursor=db.rawQuery(UserselectQuery,null);
-        if(userCursor!=null)
+        if(userCursor.getCount()>0)
         {
             userCursor.moveToFirst();
             do {
@@ -393,6 +408,115 @@ public int getMaxAppID()
             }while (userCursor.moveToNext());
         }
         return usersList;
+    }
+
+    public ArrayList<Tower> getAllTowers()
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        ArrayList<Tower> towers=new ArrayList<Tower>();
+        String all_towersqry="Select "+Constants.towerId+" , "+Constants.towername+" from "+Constants.towerTable;
+        Cursor towerCursor=db.rawQuery(all_towersqry,null);
+        Log.e("towers curs length",towerCursor.getCount()+"");
+        if(towerCursor.getCount()>0)
+        {
+            towerCursor.moveToFirst();
+            do{
+                Tower tower=new Tower();
+                tower.setTowerId(towerCursor.getInt(towerCursor.getColumnIndex(Constants.towerId)));
+                tower.setTowerName(towerCursor.getString(towerCursor.getColumnIndex(Constants.towername)));
+                towers.add(tower);
+
+            }while (towerCursor.moveToNext());
+        }
+
+        return towers;
+    }
+
+    public  ArrayList<Team> getTeamsByTower(int towerid)
+    {
+        Log.e("towerid for teams",towerid+" ");
+        SQLiteDatabase db=this.getReadableDatabase();
+
+        ArrayList<Team> teams=new ArrayList<Team>();
+        String teams_by_tower_qry="Select "+Constants.teamID+" , "+Constants.teamname+" from "+Constants.teamTable +
+                " Where "+Constants.towerId+" = "+towerid;
+       // String selectionArgs[]=new String[]{String.valueOf(towerid)};
+        Cursor teamCursor=db.rawQuery(teams_by_tower_qry,null);
+        Log.e("teamcursor count",teamCursor.getCount()+"");
+        if(teamCursor.getCount()>0)
+        {
+            Log.e("teamCursor len",teamCursor.getCount()+"");
+            teamCursor.moveToFirst();
+            do{
+                Team team=new Team();
+                team.setTeamName(teamCursor.getString(teamCursor.getColumnIndex(Constants.towername)));
+                team.setTeamID(teamCursor.getInt(teamCursor.getColumnIndex(Constants.teamID)));
+                teams.add(team);
+
+
+            }while (teamCursor.moveToNext());
+        }
+
+        return teams;
+
+    }
+
+    public ArrayList<App> getAppsbyTeams(Integer teamIDs[])
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Log.e("teamId size",teamIDs.length+" ");
+        if(teamIDs.length>0)
+            Log.e("teamid",teamIDs[0]+"");
+        ArrayList<App> apps=new ArrayList<App>();
+        String appsbyTeamQry="Select "+Constants.appId+" , "+Constants.appName+" from "+Constants.appTable +" Where "
+                +Constants.team+" IN (" +makePlaceholders(teamIDs.length) + ")";
+        int teamIdLength=teamIDs.length;
+        String selectionargs[]=new String[teamIdLength];
+        for(int i=0;i<teamIdLength;i++)
+            selectionargs[i]=teamIDs[i].toString();
+
+
+        Cursor appsCursor=db.rawQuery(appsbyTeamQry,selectionargs);
+        Log.e("appsCursor len",appsCursor.getCount()+"");
+        if(appsCursor.getCount()>0)
+        {
+            appsCursor.moveToFirst();
+            do{
+                App app=new App();
+                app.setAppName(appsCursor.getString(appsCursor.getColumnIndex(Constants.appName)));
+                app.setAppId(appsCursor.getInt(appsCursor.getColumnIndex(Constants.appId)));
+                apps.add(app);
+            }while (appsCursor.moveToNext());
+        }
+    return apps;
+    }
+    private String makePlaceholders(int len) {
+        if (len < 1) {
+            // It will lead to an invalid query anyway ..
+            throw new RuntimeException("No placeholders");
+        } else {
+            StringBuilder sb = new StringBuilder(len * 2 - 1);
+            sb.append("?");
+            for (int i = 1; i < len; i++) {
+                sb.append(",?");
+            }
+            return sb.toString();
+        }
+    }
+
+    public String getUsername(int empID)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String username_qry="Select "+Constants.username+" from "+Constants.userTable+" where "+Constants.empId +" = ?";
+        String sel_args[]=new String[]{String.valueOf(empID)};
+        Cursor userNameCursor=db.rawQuery(username_qry,sel_args);
+        if(userNameCursor.getCount()>0)
+        {
+            userNameCursor.moveToFirst();
+            return userNameCursor.getString(userNameCursor.getColumnIndex(Constants.username));
+        }
+
+        return "";
     }
 
     @Override

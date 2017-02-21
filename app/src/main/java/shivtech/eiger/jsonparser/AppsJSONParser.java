@@ -30,7 +30,7 @@ public AppsJSONParser(String json)
 
         try {
             JSONArray appsArray=new JSONArray(json);
-            Log.i("JSONArray length",appsArray.length()+"");
+            Log.e("JSONArray length",appsArray.length()+"");
             for(int i=0;i<appsArray.length();i++)
             {
                 JSONObject appJSON= appsArray.getJSONObject(i);
@@ -45,13 +45,13 @@ public AppsJSONParser(String json)
                 String supportLevel=appJSON.getString(Constants.supportLevel);
                 AppJSONModel app=new AppJSONModel(appid,appname,alias,category,tower,team,supportLevel);
 
-                Log.i("app parsed JSon",app+"");
+                Log.e("app parsed JSon",app.toString()+"");
                 appList.add(app);
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.i("app parse exp",e.toString());
+            Log.e("app parse exp",e.toString());
         }
         return appList;
     }

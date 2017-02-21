@@ -1,0 +1,152 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView"
+    android:fillViewport="true"
+    android:layout_margin="10dp"
+    android:layout_marginRight="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+    tools:context="shivtech.eiger.ProfessionalProfile">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_tower_txt"
+            android:text="Tower"
+            />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pp_tower_txt"
+            android:id="@+id/pp_tower_spinner"
+            ></Spinner>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Teams"
+            android:id="@+id/pp_teams_ip_layout"
+            android:layout_below="@+id/pp_tower_spinner"
+            >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_teams"
+            android:hint="Teams"
+            android:focusable="false"
+
+            />
+</android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            app:hintTextAppearance="@style/floatingLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_primary_apps_ip_layout"
+            android:text="Primary Apps"
+            android:layout_below="@+id/pp_teams_ip_layout"
+            >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_primary_apps"
+            android:focusable="false"
+            android:hint="Primary Apps"
+            android:layout_below="@+id/pp_primary_apps_text"
+            />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_secondary_apps_ip_layout"
+            android:text="Secondary Apps"
+            app:hintTextAppearance="@style/floatingLabel"
+            android:layout_below="@+id/pp_primary_apps_ip_layout"
+            >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pp_secondary_apps"
+            android:focusable="false"
+            android:hint="Secondary Apps"
+            android:layout_below="@+id/pp_secondary_apps_text"
+            />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/pp_tools_ip_layout"
+            android:layout_below="@+id/pp_secondary_apps_ip_layout"
+            app:hintTextAppearance="@style/floatingLabel"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pp_tools"
+                android:lines="2"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+
+                android:inputType="text"
+                android:hint="Tools"
+                />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:id="@+id/pp_prgrm_lang_ip_layout"
+            android:layout_below="@+id/pp_tools_ip_layout"
+            app:hintTextAppearance="@style/floatingLabel"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pp_prgm_lang_frmworks"
+                android:inputType="text"
+                android:lines="2"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+
+                android:hint="Programming Languages"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pp_prgrm_lang_ip_layout"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="40dp"
+
+            >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/pp_reset"
+                android:textColor="@color/white"
+                android:background="@drawable/orange_btn_white_brdr"
+                android:text="Reset"
+                />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save"
+                android:background="@drawable/trans_btn_orange_brdr"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/pp_save"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

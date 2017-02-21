@@ -15,7 +15,7 @@ public class App {
     private String appAlias;
     private String appTeam;
     private String appCategorry;
-    private User appPrimaryRes;
+    private ArrayList<User> appPrimaryRes;
     private ArrayList<User> appSecondaryRes;
     private String appSupportLevel;
 
@@ -77,11 +77,11 @@ public class App {
         this.appAlias = appAlias;
     }
 
-    public User getAppPrimaryRes() {
+    public ArrayList<User> getAppPrimaryRes() {
         return appPrimaryRes;
     }
 
-    public void setAppPrimaryRes(User appPrimaryRes) {
+    public void setAppPrimaryRes(ArrayList<User> appPrimaryRes) {
         this.appPrimaryRes = appPrimaryRes;
     }
 

@@ -42,6 +42,10 @@ public class UserJSONParser {
                 String projEmail=userJSON.getString(Constants.projectEmail);
                 int empId=userJSON.getInt(Constants.empId);
                 String bloodGroup=userJSON.getString(Constants.bloodGroup);
+                String summary=userJSON.getString(Constants.summary);
+                String tools=userJSON.getString(Constants.tools);
+                String programming_langs=userJSON.getString(Constants.programming_langs);
+                int tower=userJSON.getInt(Constants.tower);
                 String dob=userJSON.getString(Constants.dob);
                 Log.e("user details",userid+" "+name+" "+mobile+" "+tcsEmail+" "+projEmail+" "+empId);
                 user.setUserId(userid);
@@ -51,7 +55,11 @@ public class UserJSONParser {
                 user.setEmpID(empId);
                 user.setTcsEmail(tcsEmail);
                 user.setDob(dob);
+                user.setUserTower(tower);
                 user.setProjectEmail(projEmail);
+                user.setSummary(summary);
+                user.setTools(tools);
+                user.setProgramming_langs(programming_langs);
                 usersList.add(user);
 
             }

@@ -1,5 +1,7 @@
 package shivtech.eiger.jsonparser;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,15 +27,16 @@ public class AppsSecondaryJSONParser {
         ArrayList<AppSecondaryUser> appSecondaryUserArrayList = new ArrayList<AppSecondaryUser>();
         try {
             JSONArray jsonArray = new JSONArray(json);
+            Log.e("Appsecondary json array",jsonArray.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject JSON = jsonArray.getJSONObject(i);
-                int id=JSON.getInt(Constants.id);
+
                 int appid = JSON.getInt(Constants.appId);
-                int userid = JSON.getInt(Constants.userId);
+                int empid = JSON.getInt(Constants.empId);
                 AppSecondaryUser appSecondaryUser = new AppSecondaryUser();
-                appSecondaryUser.setId(id);
+
                 appSecondaryUser.setAppId(appid);
-                appSecondaryUser.setUserId(userid);
+                appSecondaryUser.setEmpId(empid);
                 appSecondaryUserArrayList.add(appSecondaryUser);
 
             }

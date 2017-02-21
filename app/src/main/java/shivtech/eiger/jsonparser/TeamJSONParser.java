@@ -32,12 +32,12 @@ public class TeamJSONParser {
             {
                 JSONObject teamJSON=jsonArray.getJSONObject(i);
                 Log.e("team josn",teamJSON.toString());
-                int teamid=teamJSON.getInt(Constants.teamID);
-                String teamName=teamJSON.getString(Constants.teamname);
-                Log.e("team json details",teamid+" "+teamName);
+
+
                 Team team=new Team();
-                team.setTeamID(teamid);
-                team.setTeamName(teamName);
+                team.setTeamID(teamJSON.getInt(Constants.teamID));
+                team.setTeamName(teamJSON.getString(Constants.teamname));
+                team.setTowerID(teamJSON.getInt(Constants.towerId));
                 teamArrayList.add(team);
 
 
