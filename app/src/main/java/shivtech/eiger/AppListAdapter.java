@@ -6,12 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,20 +24,21 @@ import shivtech.eiger.models.App;
  * Created by Sivanatarajan on 26-01-2017.
  */
 
-public  class AppListAdapter extends BaseAdapter implements SectionIndexer {
+public class AppListAdapter extends BaseAdapter implements SectionIndexer {
     HashMap<String, Integer> mapIndex;
     String[] sections;
     List<App> appsList;
     Context mContext;
     ArrayList<String> sectionList;
+
     public AppListAdapter(Context context, List<App> appList) {
         //super(context, R.layout.fragement_applistitem,appList);
-        this.mContext=context;
-        this.appsList=appList;
+        this.mContext = context;
+        this.appsList = appList;
         init();
     }
-    public void init()
-    {
+
+    public void init() {
         mapIndex = new LinkedHashMap<String, Integer>();
 
         for (int x = 0; x < appsList.size(); x++) {
@@ -49,23 +47,24 @@ public  class AppListAdapter extends BaseAdapter implements SectionIndexer {
             ch = ch.toUpperCase(Locale.US);
 
             // HashMap will prevent duplicates
-            if(mapIndex.get(ch)==null)
+            if (mapIndex.get(ch) == null)
                 mapIndex.put(ch, x);
         }
-            Set<String> sectionLetters = mapIndex.keySet();
-            Log.d("SectionLetters",sectionLetters.size()+" "+sectionLetters);
-            // create a list from the set to sort
-             sectionList = new ArrayList<String>(sectionLetters);
+        Set<String> sectionLetters = mapIndex.keySet();
+        Log.d("SectionLetters", sectionLetters.size() + " " + sectionLetters);
+        // create a list from the set to sort
+        sectionList = new ArrayList<String>(sectionLetters);
 
-            Log.d("sectionList", sectionList.toString());
-            Collections.sort(sectionList);
+        Log.d("sectionList", sectionList.toString());
+        Collections.sort(sectionList);
 
-            sections = new String[sectionList.size()];
+        sections = new String[sectionList.size()];
 
-            sectionList.toArray(sections);
+        sectionList.toArray(sections);
 
 
     }
+
     public int getPositionForSection(int section) {
         Log.d("section", "" + section);
         return mapIndex.get(sections[section]);
@@ -83,7 +82,7 @@ public  class AppListAdapter extends BaseAdapter implements SectionIndexer {
 
     @Override
     public int getCount() {
-        Log.i("in get count",appsList.size()+"");
+        Log.i("in get count", appsList.size() + "");
 
         return appsList.size();
     }
@@ -102,22 +101,22 @@ public  class AppListAdapter extends BaseAdapter implements SectionIndexer {
     public View getView(int position, View convertView, ViewGroup viewGroup) {
 
         ViewHolder viewHolder;
-        if(convertView==null) {
+        if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.fragement_applistitem, viewGroup, false);
-           viewHolder=new ViewHolder();
-            viewHolder.appName=(TextView)convertView.findViewById(R.id.app_name);
-            viewHolder.appTower=(TextView)convertView.findViewById(R.id.app_tower) ;
-            viewHolder.appID=(TextView)convertView.findViewById(R.id.app_id);
+            viewHolder = new ViewHolder();
+            viewHolder.appName = (TextView) convertView.findViewById(R.id.app_name);
+            viewHolder.appTower = (TextView) convertView.findViewById(R.id.app_tower);
+            viewHolder.appID = (TextView) convertView.findViewById(R.id.app_id);
             convertView.setTag(viewHolder);
-        }
-        else
-            viewHolder=(ViewHolder)convertView.getTag();
+        } else
+            viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.appName.setText(appsList.get(position).getAppName());
         viewHolder.appTower.setText(appsList.get(position).getAppTower());
         viewHolder.appID.setText(Integer.toString(appsList.get(position).getAppId()));
 
         return convertView;
     }
+
     static class ViewHolder {
         TextView appName;
         TextView appTower;

@@ -3,14 +3,27 @@
     package="shivtech.eiger">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
         android:debuggable="true"
+        android:name=".Eiger"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:windowSoftInputMode="adjustResize"
         android:theme="@style/AppTheme">
+        <provider
+            android:name=".datasync.StubProvider"
+            android:authorities="shivtech.eiger.datasync"
+            android:exported="false"
+            android:syncable="true" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -41,7 +54,38 @@
         <activity
             android:name=".EditProfile"
             android:label="@string/title_activity_edit_profile"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".datasync.SyncService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+        <service android:name=".datasync.AuthenticatorService">
+
+            <!-- Required filter used by the system to launch our account service. -->
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <!-- This points to an XMLf ile which describes our account service. -->
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ee871d434565c747ee6921bce759c5fdc2891605" />
+
+        <activity android:name=".VerifyMobile"></activity>
     </application>
 
 </manifest>

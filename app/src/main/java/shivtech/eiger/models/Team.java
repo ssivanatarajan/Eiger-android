@@ -5,9 +5,18 @@ package shivtech.eiger.models;
  */
 
 public class Team {
-    private  int teamID;
-    private  String teamName;
+    private int teamID;
+    private String teamName;
     private int towerID;
+    private String lastModified;
+
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
     public int getTowerID() {
         return towerID;
@@ -17,22 +26,24 @@ public class Team {
         this.towerID = towerID;
     }
 
-    public  String getTeamName() {
+    public String getTeamName() {
         return teamName;
     }
 
-    public  void setTeamName(String teamName) {
+    public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
 
-    public  int getTeamID() {
+    public int getTeamID() {
         return teamID;
     }
 
-    public  void setTeamID(int teamID) {
+    public void setTeamID(int teamID) {
         this.teamID = teamID;
     }
 
-
-
+    @Override
+    public String toString() {
+        return this.teamName;
+    }
 }

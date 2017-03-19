@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context="shivtech.eiger.Postfragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/post_input_card"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:padding="5dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write something here"
+                android:id="@+id/post_msg"
+                android:maxLines="2"
+                android:scrollbars="vertical"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post"
+                android:id="@+id/post_btn"
+                android:textColor="@color/white"
+                android:background="@drawable/orange_btn_white_brdr"
+                android:layout_below="@+id/post_msg"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentRight="true"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/post_input_card"
+        android:id="@+id/posts_recyclerview"
+        android:scrollbars="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

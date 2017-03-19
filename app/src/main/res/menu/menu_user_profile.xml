@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="shivtech.eiger.UserProfile">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/edit_profile"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Edit"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="always" />
 </menu>

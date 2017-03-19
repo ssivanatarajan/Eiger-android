@@ -16,17 +16,19 @@ import java.util.List;
  * Created by Sivanatarajan on 18-02-2017.
  */
 
-public class MultiSelectSpinner extends Spinner implements DialogInterface.OnMultiChoiceClickListener{
+public class MultiSelectSpinner extends Spinner implements DialogInterface.OnMultiChoiceClickListener {
     String[] _items = null;
     boolean[] mSelection = null;
 
     ArrayAdapter<String> simple_adapter;
+
     public MultiSelectSpinner(Context context) {
         super(context);
         simple_adapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item);
         super.setAdapter(simple_adapter);
     }
+
     @Override
     public boolean performClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

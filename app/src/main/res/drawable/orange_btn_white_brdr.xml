@@ -5,6 +5,6 @@
         />
 
     <stroke
-        android:color="@color/transparentPrimary"
+        android:color="@color/colorPrimary"
         android:width="2dp"></stroke>
 </shape>

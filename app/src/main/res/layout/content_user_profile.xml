@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_user_profile"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="shivtech.eiger.UserProfile"
-    tools:showIn="@layout/activity_user_profile">
+
 
     <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_user_profile"
         android:layout_width="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="shivtech.eiger.UserProfile"
+        tools:showIn="@layout/activity_user_profile"
 
         android:layout_height="wrap_content">
         <LinearLayout
@@ -23,7 +22,33 @@
             android:layout_height="wrap_content">
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-
+                android:layout_marginTop="10dp"
+                android:id="@+id/user_name_card"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/UP_user_name"
+                    android:gravity="center"
+                    android:textSize="24dp"
+                    android:text="Siva"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/UP_user_summary"
+                    android:gravity="center"
+                    android:text="hi there"
+                    />
+                </LinearLayout>
+                </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_marginTop="10dp"
                 android:id="@+id/user_team_card"
                 android:layout_height="wrap_content">
@@ -36,16 +61,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Team"
+                        android:text="Teams"
                         android:textSize="@dimen/profile_heading_text"
                         android:textStyle="bold"
-
                         />
-                    <TextView
+                    <ListView
                         android:layout_marginTop="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/UP_team"
+                        android:id="@+id/UP_team_list"
                         android:textSize="@dimen/profile_heading_text"
                         android:paddingLeft="10dp"
                         />
@@ -86,9 +110,8 @@
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_below="@+id/user_team_card"
                 android:layout_marginTop="10dp"
-                android:id="@+id/user_contact_card"
+                android:id="@+id/user_apps_card"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,45 +122,40 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Team"
+                        android:text="Primary Apps"
                         android:textSize="@dimen/profile_heading_text"
                         android:textStyle="bold"
                         />
-                    <TextView
+                    <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/Ap_app_team"
-                        android:paddingLeft="10dp"
-                        android:textSize="@dimen/profile_heading_text"
-                        android:layout_marginTop="5dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/UP_primaryappsList"
+                        android:textColor="@color/textlinkcolor"
+                       />
 
-                        />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Tower"
+                        android:text="Secondary Apps"
                         android:textSize="@dimen/profile_heading_text"
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
                         />
-                    <TextView
+                    <ListView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/Ap_app_tower"
-                        android:textSize="@dimen/profile_heading_text"
-                        android:paddingLeft="10dp"
-                        android:layout_marginTop="5dp"
-
+                        android:layout_height="wrap_content"
+                        android:id="@+id/UP_secappsList"
+                        android:textColor="@color/textlinkcolor"
                         />
+
 
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_below="@+id/app_team_card"
                 android:layout_marginTop="10dp"
-
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -148,21 +166,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Primary Contact"
+                        android:text="Contact Details"
                         android:textSize="@dimen/profile_heading_text"
                         android:textStyle="bold"
                         />
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:gravity="center"
+                        android:id="@+id/User_mobile_layout"
                         android:layout_height="wrap_content">
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/Ap_app_primary"
+                            android:id="@+id/UP_user_mobile"
                             android:textSize="@dimen/profile_heading_text"
-
-                            android:textColor="@color/textlinkcolor"
                             android:paddingLeft="10dp"
                             android:layout_marginTop="5dp"
                             />
@@ -170,7 +187,6 @@
                             android:layout_width="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
                             android:layout_gravity="center"
                             android:layout_height="match_parent">
 
@@ -179,7 +195,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:background="@null"
-                                android:id="@+id/Ap_app_primary_Call_btn"
+                                android:id="@+id/UP_user_Call_btn"
                                 android:layout_marginRight="10dp"
                                 android:src="@drawable/ic_call"
                                 />
@@ -188,68 +204,118 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="10dp"
-                                android:id="@+id/Ap_app_primary_msg_btn"
+                                android:id="@+id/UP_user_msg_btn"
                                 android:background="@null"
                                 android:src="@drawable/ic_message"
                                 />
                         </LinearLayout>
                     </RelativeLayout>
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:paddingLeft="10dp"
+                       android:layout_marginTop="5dp"
+                       android:id="@+id/UP_user_proj_email"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/UP_user_tcs_email"
+                        android:paddingLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Secondary Contact"
-                        android:textSize="@dimen/profile_heading_text"
                         android:textStyle="bold"
                         android:layout_marginTop="10dp"
-
+                        android:text="Programming Languages"
+                        android:textSize="@dimen/profile_heading_text"
                         />
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/UP_prgm_langs"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="Tools"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/UP_tools"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                </LinearLayout>
+                </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginLeft="10dp"
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/Ap_app_secondary"
-
-                            android:textSize="@dimen/profile_heading_text"
-                            android:textColor="@color/textlinkcolor"
-                            android:paddingLeft="10dp"
-                            android:layout_marginTop="5dp"
-                            />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_gravity="center"
-                            android:layout_height="match_parent">
-
-                            <ImageButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:id="@+id/Ap_app_secondary_call_btn"
-                                android:layout_gravity="center"
-                                android:background="@null"
-                                android:layout_marginRight="10dp"
-                                android:src="@drawable/ic_call"
-
-                                />
-                            <ImageButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                android:id="@+id/Ap_app_secondary_msg_btn"
-                                android:layout_marginRight="10dp"
-                                android:background="@null"
-                                android:src="@drawable/ic_message"
-                                />
-                        </LinearLayout>
-                    </RelativeLayout>
-
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Blood group"
+                    android:textSize="@dimen/profile_heading_text"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/UP_user_bloodgrp"
+                    android:paddingLeft="10dp"
+                    android:textSize="@dimen/profile_heading_text"
+                    />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:text="DOB"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/UP_user_dob"
+                        android:paddingLeft="10dp"
+                        android:textSize="@dimen/profile_heading_text"
+                        />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+

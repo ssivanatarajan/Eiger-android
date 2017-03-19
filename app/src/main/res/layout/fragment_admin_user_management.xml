@@ -1,0 +1,110 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="shivtech.eiger.AdminUserManagementFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:id="@+id/Admin_addUserCard"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_margin="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add User"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/profile_heading_text"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ad_add_user_empid"
+                        android:hint="Emp ID"
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:text="Add User"
+                        android:id="@+id/ad_add_user_btn"
+                        android:background="@drawable/trans_btn_orange_brdr"
+                        android:textColor="@color/colorPrimary"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:id="@+id/Admin_removeUserCard"
+            android:layout_below="@+id/Admin_addUserCard"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:layout_margin="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remove User"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/profile_heading_text"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ad_remove_user_empid"
+                        android:hint="Emp ID"
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        />
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:text="Remove User"
+                        android:id="@+id/ad_remove_user_btn"
+                        android:background="@drawable/trans_btn_orange_brdr"
+                        android:textColor="@color/colorPrimary"
+                        />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+    </RelativeLayout>
+</ScrollView>

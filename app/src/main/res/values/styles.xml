@@ -12,6 +12,13 @@
         <!-- <item name="android:fastScrollTrackDrawable">@drawable/fastscroll_thumb_pressed_holo</item> -->
         <item name="android:fastScrollPreviewBackgroundRight">@drawable/ic_circle</item>
     </style>
+    <style name="CustomDigitsTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorLink">@color/textlinkcolor</item>
+        <item name="dgts__accentColor">@color/colorAccent</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

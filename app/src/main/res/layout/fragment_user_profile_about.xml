@@ -1,0 +1,206 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="shivtech.eiger.UserProfile_about">
+
+    <!-- TODO: Update blank fragment layout -->
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/UPT_contact_card"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Contact Details"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/profile_heading_text"
+        android:textStyle="bold"
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/UPT_user_mobile"
+            android:textSize="@dimen/profile_heading_text"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textSize="@dimen/profile_heading_text"
+            android:layout_marginTop="5dp"
+            android:id="@+id/UPT_user_proj_email"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/UPT_user_tcs_email"
+            android:textSize="@dimen/profile_heading_text"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="5dp"
+            />
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
+ <!--   <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/UPT_Team_card"
+        android:layout_below="@+id/UPT_contact_card"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Teams"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/profile_heading_text"
+            android:textStyle="bold"
+            />
+
+        <ListView
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/UPT_userTeamsList"
+            />
+</LinearLayout>
+    </android.support.v7.widget.CardView> -->
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:id="@+id/UPT_usertechdetails_card"
+        android:layout_below="@+id/UPT_contact_card"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Programming Languages"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/UPT_prgm_langs"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:text="Tools"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/UPT_tools"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/profile_heading_text"
+                />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/UPT_usertechdetails_card"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="Blood group"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/UPT_user_bloodgrp"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="DOB"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/UPT_user_dob"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="Hobbies"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/profile_heading_text"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:id="@+id/UPT_user_hobbies"
+                android:paddingLeft="10dp"
+                android:textSize="@dimen/profile_heading_text"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+</RelativeLayout>
+
+</ScrollView>

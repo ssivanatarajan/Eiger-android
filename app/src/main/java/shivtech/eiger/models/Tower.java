@@ -6,36 +6,44 @@ package shivtech.eiger.models;
 
 public class Tower {
 
-    private  int towerId;
+    private int towerId;
 
-    private  String towerName;
-    private  String towerManager;
+    private String towerName;
+    private int towerManager;
+    private String lastModified;
+
     public Tower() {
     }
 
+    public String getLastModified() {
+        return lastModified;
+    }
 
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
-    public  int getTowerId() {
+    public int getTowerId() {
         return towerId;
     }
 
-    public  void setTowerId(int towerId) {
+    public void setTowerId(int towerId) {
         this.towerId = towerId;
     }
 
-    public  String getTowerName() {
+    public String getTowerName() {
         return towerName;
     }
 
-    public  void setTowerName(String towerName) {
+    public void setTowerName(String towerName) {
         this.towerName = towerName;
     }
 
-    public  String getTowerManager() {
+    public int getTowerManager() {
         return towerManager;
     }
 
-    public  void setTowerManager(String towerManager) {
+    public void setTowerManager(int towerManager) {
         this.towerManager = towerManager;
     }
 

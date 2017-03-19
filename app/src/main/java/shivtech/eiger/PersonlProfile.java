@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -37,6 +36,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import shivtech.eiger.db.DBHandler;
+import shivtech.eiger.models.User;
 import shivtech.eiger.utils.Constants;
 import shivtech.eiger.utils.Utils;
 
@@ -55,14 +56,15 @@ public class PersonlProfile extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     String currentUser;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
     SharedPreferences sharedPreferences;
     ProgressDialog progressDialog;
-    private String mParam2;
-    EditText name,mobile,tcsEmail,projEmail,dob,hobbies,bloodGroup;
-    private OnFragmentInteractionListener mListener;
+    EditText name, mobile, tcsEmail, projEmail, dob, hobbies, bloodGroup, summary;
     Calendar myCalendar;
+    DBHandler dbHandler;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private OnFragmentInteractionListener mListener;
 
     public PersonlProfile() {
         // Required empty public constructor
@@ -89,6 +91,7 @@ public class PersonlProfile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHandler = new DBHandler(getContext());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -99,39 +102,55 @@ public class PersonlProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_personl_profile, container, false);
-        sharedPreferences=getContext().getSharedPreferences(Constants.shared_prefs, Context.MODE_PRIVATE);
-        currentUser=String.valueOf(sharedPreferences.getInt(Constants.sp_cur_user_empId,0));
-        name=(EditText)view.findViewById(R.id.name);
-        mobile=(EditText)view.findViewById(R.id.mobile);
-        tcsEmail=(EditText)view.findViewById(R.id.tcsEmail);
-        projEmail=(EditText)view.findViewById(R.id.projectEmail);
-        bloodGroup=(EditText)view.findViewById(R.id.bloodgroup);
-        dob=(EditText)view.findViewById(R.id.dob);
-        hobbies=(EditText)view.findViewById(R.id.hobbies);
+        View view = inflater.inflate(R.layout.fragment_personl_profile, container, false);
+        sharedPreferences = getContext().getSharedPreferences(Constants.shared_prefs, Context.MODE_PRIVATE);
+        int empid = sharedPreferences.getInt(Constants.sp_cur_user_empId, 0);
+        currentUser = String.valueOf(empid);
+        DBHandler dbHandler = new DBHandler(getContext());
+        Log.e("surrent user empid", empid + "");
+        User user = dbHandler.getUserdetails(empid);
+
+        name = (EditText) view.findViewById(R.id.name);
+        mobile = (EditText) view.findViewById(R.id.mobile);
+        tcsEmail = (EditText) view.findViewById(R.id.tcsEmail);
+        projEmail = (EditText) view.findViewById(R.id.projectEmail);
+        bloodGroup = (EditText) view.findViewById(R.id.bloodgroup);
+        dob = (EditText) view.findViewById(R.id.dob);
+        hobbies = (EditText) view.findViewById(R.id.hobbies);
+        summary = (EditText) view.findViewById(R.id.summary);
+        Log.e("user details", user.getUserName() + "" + user.getUserMobile());
+        name.setText(user.getUserName());
+        mobile.setText(user.getUserMobile());
+        tcsEmail.setText(user.getTcsEmail());
+        projEmail.setText(user.getProjectEmail());
+        bloodGroup.setText(user.getBloodGroup());
+        dob.setText(user.getDob());
+        hobbies.setText(user.getHobbies());
+        summary.setText(user.getSummary());
+
         myCalendar = Calendar.getInstance();
-        Button save=(Button)view.findViewById(R.id.save);
-        progressDialog=new ProgressDialog(getActivity());
+        Button save = (Button) view.findViewById(R.id.save);
+        progressDialog = new ProgressDialog(getActivity());
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (!Utils.checkInternetConnection()) {
+             /*   if (!Utils.checkInternetConnection()) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext())
-                            .setMessage("No Internet Connection, plesae check your connectivity")
+                            .setMessage("No Internet Connection, please check your connectivity")
                             .setIcon(android.R.drawable.stat_sys_warning)
                             .setPositiveButton("Ok", null);
 
                     AlertDialog dialog = builder.show();
 
 
-                } else {
-                    save();
-                }
+                } else {*/
+                save();
+                //}
             }
         });
-       final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -147,15 +166,16 @@ public class PersonlProfile extends Fragment {
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getContext(),date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(getContext(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
         });
         return view;
     }
+
     private void updateDOB() {
 
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         dob.setText(sdf.format(myCalendar.getTime()));
@@ -163,8 +183,9 @@ public class PersonlProfile extends Fragment {
 
     private void save() {
         String profile_save_url = "https://eigerapp.herokuapp.com/api/users/";
-        boolean isValid=true;
-        final String str_name, str_tcsEmail, str_projEmail, str_hobbies, str_mobile, str_dob, str_bloodGroup;
+        boolean isValid = true;
+        final String str_name, str_tcsEmail, str_projEmail, str_hobbies, str_mobile, str_dob, str_bloodGroup, str_summary;
+        str_summary = summary.getText().toString();
         str_name = name.getText().toString();
         str_tcsEmail = tcsEmail.getText().toString();
         str_projEmail = projEmail.getText().toString();
@@ -172,6 +193,7 @@ public class PersonlProfile extends Fragment {
         str_hobbies = hobbies.getText().toString();
         str_dob = dob.getText().toString();
         str_bloodGroup = bloodGroup.getText().toString();
+
         String projEmailPattern = "[a-zA-Z0-9._-]+@vodafone.com";
         if (str_name.trim().length() == 0) {
             isValid = false;
@@ -190,7 +212,7 @@ public class PersonlProfile extends Fragment {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(str_tcsEmail.trim()).matches()) {
             isValid = false;
             tcsEmail.requestFocus();
-            tcsEmail.setError("TCS Email");
+            tcsEmail.setError(" Invalid TCS Email");
         }
         if (str_projEmail.trim().length() == 0) {
             isValid = false;
@@ -213,72 +235,86 @@ public class PersonlProfile extends Fragment {
             bloodGroup.setError("BloodGroup is required");
         }
         if (isValid) {
-            progressDialog.setMessage("Saving data..");
-            progressDialog.show();
+            long res = dbHandler.updatePersonalProfile(currentUser, str_name, str_summary, str_tcsEmail, str_projEmail, str_mobile, str_hobbies, str_dob, str_bloodGroup);
+            if (res == 1)
+                Toast.makeText(getContext(), "Profile updated", Toast.LENGTH_LONG).show();
 
-            Log.e("isvalid","true");
-            final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            JSONObject params=new JSONObject();
-            try {
-                params.put("empId",currentUser);
-                params.put("name", str_name);
-                params.put("bloodGroup",str_bloodGroup);
-                params.put("mobile",str_mobile);
-                params.put("tcsEmail",str_tcsEmail);
-                params.put("projEmail",str_projEmail);
-                params.put("dob",str_dob);
-                params.put("hobbies",str_hobbies);
+            if (Utils.checkInternetConnection()) {
+                progressDialog.setMessage("Saving data..");
+                progressDialog.show();
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                Log.e("isvalid", "true");
+                final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                JSONObject params = new JSONObject();
+                try {
+                    params.put("empId", currentUser);
+                    params.put("name", str_name);
+                    params.put("bloodGroup", str_bloodGroup);
+                    params.put("mobile", str_mobile);
+                    params.put("tcsEmail", str_tcsEmail);
+                    params.put("projEmail", str_projEmail);
+                    params.put("dob", str_dob);
+                    params.put("hobbies", str_hobbies);
+                    params.put("summary", str_summary);
 
-            final String requestBody = params.toString();
-            final JsonObjectRequest update_profile_request = new JsonObjectRequest(Request.Method.POST, profile_save_url, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.e("save res",response.toString());
-                            try {
-                                if(response.getString("msg").equals("updated successfully"))
-                                    Toast.makeText(getContext(),"Profile updated",Toast.LENGTH_LONG).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                final String requestBody = params.toString();
+                final JsonObjectRequest update_profile_request = new JsonObjectRequest(Request.Method.POST, profile_save_url, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                Log.e("save res", response.toString());
+                                try {
+                                    if (response.getString("msg").equals("updated successfully"))
+                                        Toast.makeText(getContext(), "Profile updated", Toast.LENGTH_LONG).show();
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                progressDialog.dismiss();
                             }
-                            progressDialog.dismiss();
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("save err",error.toString());
-                    Toast.makeText(getContext(),"Error occurs "+error.toString(),Toast.LENGTH_LONG).show();
-                    progressDialog.setMessage("Error occurs");
-                    progressDialog.dismiss();
-                }
-            }) {
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("save err", error.toString());
+                        Toast.makeText(getContext(), "Error occurs " + error.toString(), Toast.LENGTH_LONG).show();
+                        dbHandler.makeDirty(Constants.userTable, 1, currentUser);
+                        progressDialog.setMessage("Error occurs");
+                        progressDialog.dismiss();
 
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
-                    headers.put("Content-Type", "application/json");
-                    return headers;
-                }
-
-
-                @Override
-                public byte[] getBody() {
-                    try {
-                        return requestBody == null ? null : requestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
-                                requestBody, "utf-8");
-                        return null;
                     }
-                }
-            };
-        requestQueue.add(update_profile_request);
+                }) {
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        return headers;
+                    }
+
+
+                    @Override
+                    public byte[] getBody() {
+                        try {
+                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
+                                    requestBody, "utf-8");
+                            return null;
+                        }
+                    }
+                };
+                requestQueue.add(update_profile_request);
+            } else {
+                dbHandler.makeDirty(Constants.userTable, 1, currentUser);
+
+            }
         }
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

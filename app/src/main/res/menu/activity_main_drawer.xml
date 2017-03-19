@@ -10,12 +10,38 @@
             android:id="@+id/nav_people"
             android:icon="@drawable/ic_person"
             android:title="People" />
+
+        <item
+            android:id="@+id/nav_posts"
+            android:icon="@drawable/ic_person"
+            android:title="Posts" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_error"
             android:title="About" />
+       <!-- <item
+            android:id="@+id/admin_group"
+            android:title="Admin"
+            >
+            <menu>
+                <group android:checkableBehavior="single">
 
-    </group>
+                <item
+                    android:id="@+id/app_mangement"
+                    android:title="Manage Apps"
+                    android:icon="@drawable/ic_apps"
+                    ></item>
+                <item
+                    android:id="@+id/user_mangement"
+                    android:title="Manage Users"
+                    android:icon="@drawable/ic_person"
+                    ></item>
+            </group>
+            </menu>
+
+        </item>
+-->
+
 
 <!--    <item android:title="Communicate">
         <menu>
@@ -29,5 +55,5 @@
                 android:title="Send" />
         </menu>
     </item> -->
-
+    </group>
 </menu>

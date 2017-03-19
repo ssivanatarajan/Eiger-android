@@ -1,22 +1,135 @@
 package shivtech.eiger.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sivanatarajan on 24-01-2017.
  */
 
 public class User {
     //private String _id;
-    private int userId;
+
     private String userName;
     private String tcsEmail;
     private int empID;
     private String userMobile;
-    private int userTower;
-    private String userManager;
+
+
+    private int userTowerID;
+    private String towerManager;
     private String dob;
     private String summary;
     private String tools;
     private String programming_langs;
+    private String hobbies;
+    private String userRole;
+    private ArrayList<App> primaryApps;
+    private ArrayList<App> secondaryApps;
+    private ArrayList<Team> userTeams;
+    private String usertowerName;
+    private String teams;
+    private String lastModified;
+    private String projectEmail;
+    private String bloodGroup;
+
+    public User(int empid, String userName, String userTower) {
+        this.empID = empid;
+        this.userName = userName;
+        this.usertowerName = userTower;
+    }
+
+    public User() {
+    }
+
+    public User(String userName, int empid, String userEmail, String userMobile, String userTower, String userManager, String userPrimaryApps, String userSecondaryApps) {
+
+        this.userName = userName;
+        this.empID = empid;
+
+        this.userMobile = userMobile;
+        this.usertowerName = userTower;
+        this.towerManager = userManager;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getUsertowerName() {
+        return usertowerName;
+    }
+
+    public void setUsertowerName(String usertowerName) {
+        this.usertowerName = usertowerName;
+    }
+
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public int getUserTowerID() {
+        return userTowerID;
+    }
+
+    public void setUserTowerID(int userTowerID) {
+        this.userTowerID = userTowerID;
+    }
+
+    public ArrayList<Team> getUserTeams() {
+        return userTeams;
+    }
+
+    public void setUserTeams(ArrayList<Team> userTeams) {
+        this.userTeams = userTeams;
+    }
+
+    public ArrayList<App> getPrimaryApps() {
+        return primaryApps;
+    }
+
+    public void setPrimaryApps(ArrayList<App> primaryApps) {
+        this.primaryApps = primaryApps;
+    }
+
+    public ArrayList<App> getSecondaryApps() {
+        return secondaryApps;
+    }
+
+    public void setSecondaryApps(ArrayList<App> secondaryApps) {
+        this.secondaryApps = secondaryApps;
+    }
+
+    public String getUserTowerName() {
+        return usertowerName;
+    }
+
+    public void setUserTowerName(String towerName) {
+        this.usertowerName = towerName;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public String getTeams() {
+        return teams;
+    }
+
+    public void setTeams(String teams) {
+        this.teams = teams;
+    }
 
     public String getTools() {
         return tools;
@@ -82,18 +195,6 @@ public class User {
         this.bloodGroup = bloodGroup;
     }
 
-    private String projectEmail;
-    private String bloodGroup;
-
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -101,7 +202,6 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
 
     public String getUserMobile() {
         return userMobile;
@@ -111,37 +211,12 @@ public class User {
         this.userMobile = userMobile;
     }
 
-    public int getUserTower() {
-        return userTower;
+    public String getTowerManager() {
+        return towerManager;
     }
 
-    public void setUserTower(int userTower) {
-        this.userTower = userTower;
+    public void setTowerManager(String userManager) {
+        this.towerManager = userManager;
     }
-
-    public String getUserManager() {
-        return userManager;
-    }
-
-    public void setUserManager(String userManager) {
-        this.userManager = userManager;
-    }
-
-
-    public User(int userId, String userName, int userTower) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userTower = userTower;
-    }
-public User(){}
-    public User( String userName, int userId, String userEmail, String userMobile, int userTower, String userManager, String userPrimaryApps, String userSecondaryApps) {
-
-        this.userName = userName;
-        this.userId = userId;
-
-        this.userMobile = userMobile;
-        this.userTower = userTower;
-        this.userManager = userManager;
-        }
 
 }

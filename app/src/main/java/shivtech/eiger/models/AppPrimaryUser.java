@@ -8,6 +8,15 @@ public class AppPrimaryUser {
     private int empId;
     private int appId;
     private int id;
+    private String lastModified;
+
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
     public int getId() {
         return id;

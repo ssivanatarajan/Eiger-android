@@ -1,14 +1,14 @@
 package shivtech.eiger.models;
 
-import java.util.ArrayList;
-
 /**
  * Created by Sivanatarajan on 04-02-2017.
  */
 
 public class AppJSONModel {
 
-
+/*
+    Model class for parsing JSON content of APPS
+ */
     private int appId;
     private String appName;
     private int appTowerID;
@@ -17,8 +17,38 @@ public class AppJSONModel {
     private int appTeamID;
     private String appCategorry;
     private String appSupportLevel;
+    private String lastModified;
+
+    public AppJSONModel() {
+    }
+
+    public AppJSONModel(int appId, String appName, String appAlias, int appTower) {
+        this.appId = appId;
+        this.appName = appName;
+        this.appAlias = appAlias;
+        this.appTowerID = appTower;
+    }
 
 
+    public AppJSONModel(int appId, String appName, String appAlias, String appCategory, int tower, int team, String supportLevel, String lastModified) {
+
+        this.appId = appId;
+        this.appName = appName;
+        this.appTowerID = tower;
+        this.appTeamID = team;
+        this.appSupportLevel = supportLevel;
+        this.lastModified = lastModified;
+        this.appAlias = appAlias;
+        this.appCategorry = appCategory;
+    }
+
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 
     public String getAppSupportLevel() {
         return appSupportLevel;
@@ -60,12 +90,6 @@ public class AppJSONModel {
         this.appId = appId;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-
-
     public String getAppAlias() {
         return appAlias;
     }
@@ -74,29 +98,11 @@ public class AppJSONModel {
         this.appAlias = appAlias;
     }
 
-
-
-    public AppJSONModel(){}
-    public AppJSONModel(int appId, String appName,String appAlias, int appTower) {
-        this.appId = appId;
-        this.appName = appName;
-        this.appAlias=appAlias;
-        this.appTowerID=appTower;
-    }
-    public String getAppName()
-    {
+    public String getAppName() {
         return this.appName;
     }
 
-    public AppJSONModel( int appId, String appName, String appAlias,String appCategory,int tower,int team,String supportLevel) {
-
-        this.appId = appId;
+    public void setAppName(String appName) {
         this.appName = appName;
-        this.appTowerID = tower;
-        this.appTeamID=team;
-        this.appSupportLevel=supportLevel;
-
-        this.appAlias = appAlias;
-        this.appCategorry=appCategory;
     }
 }

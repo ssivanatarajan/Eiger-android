@@ -5,57 +5,63 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import shivtech.eiger.db.DBHandler;
 import shivtech.eiger.models.App;
 import shivtech.eiger.models.User;
 
 public class AppProfile extends AppCompatActivity {
-TextView apptower,appCategory,appAlias,appteam,appPrimaryres,appSecondaryRes,appSupportLevel;
+    TextView apptower, appCategory, appAlias, appteam, appPrimaryres, appSecondaryRes, appSupportLevel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-        apptower=(TextView)findViewById(R.id.Ap_app_tower);
-        appCategory=(TextView)findViewById(R.id.Ap_app_category);
-        appAlias=(TextView)findViewById(R.id.Ap_app_alias);
-        appteam=(TextView)findViewById(R.id.Ap_app_team);
-        appPrimaryres=(TextView)findViewById(R.id.Ap_app_primary);
-        appSecondaryRes=(TextView)findViewById(R.id.Ap_app_secondary);
-        appSupportLevel=(TextView)findViewById(R.id.Ap_app_support_level);
-        int appId=getIntent().getExtras().getInt("AppID");
-        DBHandler dataBaseHandler=new DBHandler(getApplicationContext());
-       final App app=dataBaseHandler.getAppDetails(appId);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        apptower = (TextView) findViewById(R.id.Ap_app_tower);
+        appCategory = (TextView) findViewById(R.id.Ap_app_category);
+        appAlias = (TextView) findViewById(R.id.Ap_app_alias);
+        appteam = (TextView) findViewById(R.id.Ap_app_team);
+        appPrimaryres = (TextView) findViewById(R.id.Ap_app_primary);
+        appSecondaryRes = (TextView) findViewById(R.id.Ap_app_secondary);
+        appSupportLevel = (TextView) findViewById(R.id.Ap_app_support_level);
+        int appId = getIntent().getExtras().getInt("AppID");
+        DBHandler dataBaseHandler = new DBHandler(getApplicationContext());
+        final App app = dataBaseHandler.getAppDetails(appId);
         getSupportActionBar().setTitle(app.getAppName());
 
         /*String alias=app.getAppAlias() !=null ? app.getAppAlias():" ";
         String category=app.getAppCategorry() !=null ?app.getAppCategorry():" ";
         String tower=app.getAppTower()
 */
-         appAlias.setText(app.getAppAlias());
+        appAlias.setText(app.getAppAlias());
 
         apptower.setText(app.getAppTower());
         appCategory.setText(app.getAppCategorry());
         appAlias.setText(app.getAppAlias());
         appteam.setText(app.getAppTeam());
         appSupportLevel.setText(app.getAppSupportLevel());
-       final User primaryUser=app.getAppPrimaryRes().get(0);
-        if(primaryUser!=null) {
+
+        ArrayList<User> primaryUserList = app.getAppPrimaryRes();
+
+        if (primaryUserList != null && primaryUserList.size() > 0) {
+            final User primaryUser = primaryUserList.get(0);
             appPrimaryres.setText(primaryUser.getUserName());
-            ImageButton primaryCallbtn=(ImageButton)findViewById(R.id.Ap_app_primary_Call_btn);
-            ImageButton primarySMSbtn=(ImageButton)findViewById(R.id.Ap_app_primary_msg_btn);
+            ImageButton primaryCallbtn = (ImageButton) findViewById(R.id.Ap_app_primary_Call_btn);
+            ImageButton primarySMSbtn = (ImageButton) findViewById(R.id.Ap_app_primary_msg_btn);
             primaryCallbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri number= Uri.parse("tel:"+primaryUser.getUserMobile());
-                    Intent callIntent=new Intent(Intent.ACTION_DIAL,number);
+                    Uri number = Uri.parse("tel:" + primaryUser.getUserMobile());
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                     startActivity(callIntent);
 
                 }
@@ -76,8 +82,9 @@ TextView apptower,appCategory,appAlias,appteam,appPrimaryres,appSecondaryRes,app
 
         }
 
-        User secUser=app.getAppSecondaryRes().get(0);
-        if(secUser!=null) {
+        ArrayList<User> secuserList = app.getAppSecondaryRes();
+        if (secuserList != null && secuserList.size() > 0) {
+            final User secUser = app.getAppSecondaryRes().get(0);
             appSecondaryRes.setText(secUser.getUserName());
 
             ImageButton secondaryCallbtn = (ImageButton) findViewById(R.id.Ap_app_secondary_call_btn);
@@ -86,7 +93,7 @@ TextView apptower,appCategory,appAlias,appteam,appPrimaryres,appSecondaryRes,app
             secondaryCallbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri number = Uri.parse("tel:" + app.getAppSecondaryRes().get(0).getUserMobile());
+                    Uri number = Uri.parse("tel:" + secUser.getUserMobile());
                     Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                     startActivity(callIntent);
                 }
@@ -97,7 +104,7 @@ TextView apptower,appCategory,appAlias,appteam,appPrimaryres,appSecondaryRes,app
                 public void onClick(View view) {
                     Intent smsIntent = new Intent(Intent.ACTION_VIEW);
                     smsIntent.setType("vnd.android-dir/mms-sms");
-                    smsIntent.putExtra("address", app.getAppSecondaryRes().get(0).getUserMobile());
+                    smsIntent.putExtra("address", secUser.getUserMobile());
                     // smsIntent.putExtra("sms_body","Body of Message");
                     startActivity(smsIntent);
                 }
@@ -113,4 +120,19 @@ TextView apptower,appCategory,appAlias,appteam,appPrimaryres,appSecondaryRes,app
         });*/
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

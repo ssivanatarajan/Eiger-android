@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,15 +30,15 @@ public class UserListFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    ListView listView;
+    SearchView searchView;
+    ArrayList<User> users, filteredUsers;
+    UserListAdapter mUsersAdapter;
+    boolean firstLoad;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    ListView listView;
     private Context mContext;
-    SearchView searchView;
-    ArrayList<User> users,filteredUsers;
-    UserListAdapter mUsersAdapter;
-    boolean firstLoad;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,28 +69,29 @@ public class UserListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_userlist, container, false);
-        listView=(ListView) view.findViewById(R.id.userList);
-        searchView=(SearchView) view.findViewById(R.id.userlist_searchview);
+        View view = inflater.inflate(R.layout.fragment_userlist, container, false);
+        listView = (ListView) view.findViewById(R.id.userList);
+        searchView = (SearchView) view.findViewById(R.id.userlist_searchview);
         // jsonView=(TextView)view.findViewById(R.id.jsonresponse);
-        DBHandler dbHandler=new DBHandler(getContext());
-        users=dbHandler.getUsers();
-        filteredUsers=users;
+        mContext = getContext();
+        DBHandler dbHandler = new DBHandler(getContext());
+        users = dbHandler.getUsers();
+        filteredUsers = users;
         searchView.onActionViewExpanded();
         searchView.setIconified(false);
         searchView.setIconifiedByDefault(false);
         searchView.clearFocus();
         listView.setFastScrollEnabled(true);
-        View empty_list_view=LayoutInflater.from(getContext()).inflate(R.layout.empty_list_view,null);
+        View empty_list_view = LayoutInflater.from(getContext()).inflate(R.layout.empty_list_view, null);
         listView.setEmptyView(empty_list_view);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Intent userProfIntent=new Intent(mContext,UserProfile.class);
-                TextView userIdview=(TextView)view.findViewById(R.id.user_id);
-                int userId=Integer.parseInt(userIdview.getText().toString());
-                userProfIntent.putExtra("UserID",userId);
-                Log.i("itemclick","itemclick");
+                final Intent userProfIntent = new Intent(mContext, UserProfile.class);
+                TextView userIdview = (TextView) view.findViewById(R.id.user_id);
+                int empId = Integer.parseInt(userIdview.getText().toString());
+                userProfIntent.putExtra("EmpID", empId);
+                Log.i("itemclick", "itemclick");
                 mContext.startActivity(userProfIntent);
             }
         });
@@ -101,12 +99,11 @@ public class UserListFragment extends Fragment {
         searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-                Log.i("searchview onfocus","in");
-                if(firstLoad)
-                {
-                    Log.i("firstLoad-searchview","true");
+                Log.i("searchview onfocus", "in");
+                if (firstLoad) {
+                    Log.i("firstLoad-searchview", "true");
                     searchView.clearFocus();
-                    firstLoad=false;
+                    firstLoad = false;
                 }
 
             }
@@ -115,10 +112,10 @@ public class UserListFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(query.trim().length()>0) {
+                if (query.trim().length() > 0) {
                     query = query.toLowerCase();
                     filteredUsers = new ArrayList<User>();
-                    for(User user:users) {
+                    for (User user : users) {
                        /* if (user.getUserMobile() != null) {
                             if (user.getUserName().toLowerCase().contains(query) )
                                 filteredUsers.add(user);
@@ -128,11 +125,10 @@ public class UserListFragment extends Fragment {
                             filteredUsers.add(user);
 
                     }
-                }
-                else
-                    filteredUsers=users;
+                } else
+                    filteredUsers = users;
                 sortUsers();
-                mUsersAdapter=new UserListAdapter(getContext(),filteredUsers);
+                mUsersAdapter = new UserListAdapter(getContext(), filteredUsers);
                 listView.setAdapter(mUsersAdapter);
 
                 mUsersAdapter.notifyDataSetChanged();
@@ -143,7 +139,7 @@ public class UserListFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String query) {
 
-                if(query.trim().length()>0) {
+                if (query.trim().length() > 0) {
                     query = query.toLowerCase();
                     filteredUsers = new ArrayList<User>();
                     for (User user : users) {
@@ -156,24 +152,23 @@ public class UserListFragment extends Fragment {
                             filteredUsers.add(user);
 
                     }
-                }
-                else
-                    filteredUsers=users;
+                } else
+                    filteredUsers = users;
                 sortUsers();
-                mUsersAdapter=new UserListAdapter(getContext(),filteredUsers);
+                mUsersAdapter = new UserListAdapter(getContext(), filteredUsers);
                 listView.setAdapter(mUsersAdapter);
 
                 mUsersAdapter.notifyDataSetChanged();
                 return false;
             }
         });
-        mUsersAdapter=new UserListAdapter(getContext(),filteredUsers);
+        mUsersAdapter = new UserListAdapter(getContext(), filteredUsers);
         listView.setAdapter(mUsersAdapter);
-
 
 
         return view;
     }
+
     private void sortUsers() {
         Collections.sort(filteredUsers, new Comparator<User>() {
             @Override
@@ -182,7 +177,6 @@ public class UserListFragment extends Fragment {
             }
         });
     }
-
 
 
     @Override

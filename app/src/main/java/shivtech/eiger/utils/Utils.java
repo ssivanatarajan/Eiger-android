@@ -41,14 +41,18 @@ import shivtech.eiger.models.User;
 
 public class Utils {
 
-     Context mContext;
+    private static final String getTablesURL = "https://eigerapp.herokuapp.com/api/downloadTables";
     static String reqTypes[] = {"Towers", "Users", "Teams", "Apps", "AppPrimaryUsers", "AppSecondaryUsers"};
     static int typeCounter;
     static SharedPreferences.Editor sp_editor;
     static RequestQueue requestQueue;
     static ProgressDialog progressDialog;
-    private static final String getTablesURL = "https://eigerapp.herokuapp.com/api/downloadTables";
     static SharedPreferences sharedPreferences;
+    Context mContext;
+
+    public Utils(Activity activity) {
+        this.mContext = activity;
+    }
 
     public static boolean checkInternetConnection() {
 
@@ -63,11 +67,8 @@ public class Utils {
             return false;
         }
     }
-public Utils(Activity activity)
-{
- this.mContext=activity;
-}
-    public  void downloadDumps() {
+
+    public void downloadDumps() {
 
         sharedPreferences = mContext.getSharedPreferences(Constants.shared_prefs, Context.MODE_PRIVATE);
         requestQueue = Volley.newRequestQueue(mContext);
@@ -78,7 +79,7 @@ public Utils(Activity activity)
         sp_editor.commit();
     }
 
-    private  void sendRequest(final String type) {
+    private void sendRequest(final String type) {
 
         Log.e("reqtypes", reqTypes[typeCounter] + " " + typeCounter + " " + type);
         String URL = getTablesURL + "/" + type;
@@ -103,8 +104,7 @@ public Utils(Activity activity)
                                     mContext.startActivity(mainIntent);
                                     ((Activity) mContext).finish();
                                 }
-                                if(mContext instanceof Signup)
-                                {
+                                if (mContext instanceof Signup) {
                                     Intent profile_intent = new Intent(mContext, EditProfile.class);
                                     mContext.startActivity(profile_intent);
                                     ((Activity) mContext).finish();
@@ -131,10 +131,9 @@ public Utils(Activity activity)
         requestQueue.add(stringRequest);
 
 
-
     }
 
-    private  void loadTables(String response, String type) {
+    private void loadTables(String response, String type) {
         DBHandler dbHandler = new DBHandler(mContext);
         ArrayList<AppJSONModel> appsJSON;
 
@@ -166,7 +165,7 @@ public Utils(Activity activity)
                 break;
             case "Towers":
                 TowerJSONParser towerJSONParser = new TowerJSONParser(response);
-                Log.e("towers json",response);
+                Log.e("towers json", response);
                 towers = towerJSONParser.parseJSON();
                 Log.e("Towers", "adding towers " + towers.size());
                 dbHandler.addTowers(towers);
@@ -187,7 +186,6 @@ public Utils(Activity activity)
                 Log.i("adding to tables", "default case");
                 break;
         }
-
 
     }
 }

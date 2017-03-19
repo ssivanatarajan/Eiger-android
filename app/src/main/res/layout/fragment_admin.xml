@@ -1,13 +1,56 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
+    android:gravity="center"
     tools:context="shivtech.eiger.AdminFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Add User"
+        android:paddingRight="20dp"
+        android:drawableRight="@drawable/ic_person"
+        android:background="@drawable/trans_btn_orange_brdr"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/ad_add_user"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ad_add_user"
+        android:layout_weight="1"
+        android:text="Remove User"
+        android:paddingRight="20dp"
+        android:drawableRight="@drawable/ic_person"
+        android:background="@drawable/trans_btn_orange_brdr"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/ad_remove_user"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ad_remove_user"
+        android:text="Add App"
+        android:paddingRight="20dp"
+        android:drawableRight="@drawable/ic_apps"
+        android:background="@drawable/trans_btn_orange_brdr"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/ad_add_app"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ad_add_app"
+        android:text="Remove App"
+        android:paddingRight="20dp"
+        android:drawableRight="@drawable/ic_apps"
+        android:background="@drawable/trans_btn_orange_brdr"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/ad_remove_app"
+        />
+</RelativeLayout>
